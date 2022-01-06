@@ -1,6 +1,18 @@
 <template>
   <div id="app">
-    <add-widgets></add-widgets>
+    <b-container>
+      <b-row align-v="center">
+        <b-col md="6">
+          <b-card>
+          </b-card>
+        </b-col>
+        <b-col md="6">
+          <b-card>
+            <add-widgets></add-widgets>
+          </b-card>
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
