@@ -43,7 +43,7 @@ export default {
       }
       axios.post('http://localhost/kaweb/test/widgetapi/public/api/calcWidgets', data)
         .then((res) => {
-          console.log(res)
+          console.log(res.data)
           this.$store.commit('calcWidgets', res.data)
         })
         .catch((err) => {

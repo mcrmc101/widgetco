@@ -13,6 +13,7 @@
       @click="deleteWidgets"
       variant="danger"
       size="sm"
+      class="mt-3"
     >Delete</b-button>
   </div>
 </template>

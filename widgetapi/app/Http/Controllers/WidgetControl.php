@@ -33,12 +33,30 @@ class WidgetControl extends Controller
 
     //calculate
     public function calcWidgets(Request $req){
+        //get submitted number
         $num = e($req['num']);
-        $wid = Widget::orderBy('size','asc')->pluck('size')->get();
-        /*$widArr = array();
+        //get widgets ordered by size
+        $wid = Widget::orderBy('size','asc')->get();
+        //make array of size values from all widgets
+        $widArr = array();
         foreach($wid as $w){
-            array_push($w->size);
-        }*/
-        return $wid;
+            array_push($widArr,$w->size);
+        }
+        //get new array with size values as keys
+        $resArr = array_fill_keys($widArr,0);
+        //while submitted number is more than 0
+        while($num > 0){
+            //for each widget size
+            foreach($widArr as $a){
+                // if widget size is greater or equal to submitted number end loop
+                if($a >= $num)break;
+            }
+            //add one to new size array count
+            ++$resArr[$a];
+            //subtract size value from submitted number until 0
+            $num -= $a;
+        }
+        //return the new array with counts of size values
+        return $resArr;
     }
 }
