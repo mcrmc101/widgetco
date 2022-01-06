@@ -4,7 +4,10 @@
       @click="deleteWidgets"
       variant="danger"
     >Delete</b-button>
-    <b-form @submit.prevent="addWidgets">
+    <b-form
+      @submit.prevent="addWidgets"
+      ref="addForm"
+    >
       <b-row align-v="end">
         <b-col>
           <b-form-group
@@ -43,18 +46,20 @@ export default {
   methods: {
     addWidgets: function () {
       var data = {
-        'num': this.size
+        'size': this.size
       }
       axios.post('http://localhost/kaweb/test/widgetapi/public/api/addWidgets', data)
         .then((res) => {
           console.log(res);
+          this.$store.commit('addWidgets')
+          this.$refs.addForm.reset()
         })
         .catch((err) => {
           console.log(err)
         })
     },
     deleteWidgets: function () {
-      axios.post('http://localhost/kaweb/test/widgetapi/public/api/addWidgets')
+      axios.post('http://localhost/kaweb/test/widgetapi/public/api/deleteWidgets')
         .then((res) => {
           console.log(res);
         })

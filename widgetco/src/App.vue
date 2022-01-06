@@ -3,11 +3,12 @@
     <b-container>
       <b-row align-v="center">
         <b-col md="6">
-          <b-card>
+          <b-card bg-variant="light">
+            <all-widgets></all-widgets>
           </b-card>
         </b-col>
         <b-col md="6">
-          <b-card>
+          <b-card bg-variant="light">
             <add-widgets></add-widgets>
           </b-card>
         </b-col>
@@ -17,14 +18,29 @@
 </template>
 
 <script>
+import axios from 'axios'
 import AddWidgets from './components/AddWidgets.vue'
-
-
+import AllWidgets from './components/AllWidgets.vue'
 export default {
   name: 'App',
   components: {
-    AddWidgets
-
+    AddWidgets,
+    AllWidgets
+  },
+  created () {
+    this.getWidgets()
+  },
+  methods: {
+    getWidgets: function () {
+      axios.get('http://localhost/kaweb/test/widgetapi/public/api/allWidgets')
+        .then((res) => {
+          // console.log(res.data)
+          this.$store.commit('setWidgets', res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
   }
 }
 </script>
