@@ -17,3 +17,4 @@ use App\Http\Controllers\WidgetControl;
 
 Route::get('testC', [ WidgetControl::class, 'testC' ]);
 Route::post('addWidgets', [ WidgetControl::class, 'addWidgets' ]);
+Route::post('deleteWidgets', [ WidgetControl::class, 'deleteWidgets' ]);

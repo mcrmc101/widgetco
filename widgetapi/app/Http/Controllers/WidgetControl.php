@@ -18,4 +18,12 @@ class WidgetControl extends Controller
         $wid->save();
         return response()->json(['Saved' => $wid], 200);
     }
+
+    public function deleteWidgets(){
+        $wid = Widget::all();
+        foreach($wid as $w){
+            $w->delete();
+        }
+        return response()->json(['Deleted'], 200);
+    }
 }

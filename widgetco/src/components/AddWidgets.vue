@@ -1,5 +1,9 @@
 <template>
   <div>
+    <b-button
+      @click="deleteWidgets"
+      variant="danger"
+    >Delete</b-button>
     <b-form @submit.prevent="addWidgets">
       <b-row align-v="end">
         <b-col>
@@ -42,6 +46,15 @@ export default {
         'num': this.size
       }
       axios.post('http://localhost/kaweb/test/widgetapi/public/api/addWidgets', data)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    deleteWidgets: function () {
+      axios.post('http://localhost/kaweb/test/widgetapi/public/api/addWidgets')
         .then((res) => {
           console.log(res);
         })
