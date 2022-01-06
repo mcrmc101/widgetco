@@ -1,20 +1,16 @@
 <template>
   <div>
-    <b-form
-      @submit.prevent="addWidgets"
-      ref="addForm"
-    >
+    <b-form @submit.prevent="calcWidgets">
       <b-row align-v="end">
         <b-col>
           <b-form-group
-            label-for="winput"
-            label="Add Widget Packs:"
+            label="Calculate Number of Packs:"
+            label-for="calcinput"
           >
             <b-form-input
-              id="winput"
-              v-model="size"
+              id="calcinput"
+              v-model="num"
               type="number"
-              placeholder=""
               required
             ></b-form-input>
           </b-form-group>
@@ -24,7 +20,7 @@
             <b-button
               type="submit"
               variant="success"
-            >Save</b-button>
+            >Calculate</b-button>
           </b-form-group>
         </b-col>
       </b-row>
@@ -34,27 +30,26 @@
 <script>
 import axios from 'axios'
 export default {
-  name: 'AddWidgets',
+  name: 'CalcWidgets',
   data () {
     return {
-      size: ''
+      num: ''
     }
   },
   methods: {
-    addWidgets: function () {
+    calcWidgets: function () {
       var data = {
-        'size': this.size
+        'num': this.num
       }
       axios.post('http://localhost/kaweb/test/widgetapi/public/api/addWidgets', data)
         .then((res) => {
-          console.log(res);
-          this.$store.commit('addWidgets')
-          this.$refs.addForm.reset()
+          console.log(res)
+          //this.$store.commit('calcWidgets',res.data)
         })
         .catch((err) => {
           console.log(err)
         })
-    },
+    }
   }
 }
 </script>

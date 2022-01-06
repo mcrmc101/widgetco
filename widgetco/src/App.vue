@@ -1,6 +1,18 @@
 <template>
   <div id="app">
-    <b-container>
+    <b-navbar
+      variant="dark"
+      type="dark"
+    >
+      <b-navbar-brand
+        tag="h1"
+        class="ms-3"
+      >Wallys Widgets</b-navbar-brand>
+    </b-navbar>
+    <b-container
+      class="p-3"
+      fluid
+    >
       <b-row align-v="center">
         <b-col md="6">
           <b-card bg-variant="light">
