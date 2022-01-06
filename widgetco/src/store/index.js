@@ -6,7 +6,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    widgets: ''
+    widgets: '',
+    result: ''
   },
   mutations: {
     setWidgets (state, value) {
@@ -20,6 +21,9 @@ export default new Vuex.Store({
         .catch((err) => {
           console.log(err)
         })
+    },
+    calcWidgets (state, value) {
+      state.result = value
     }
   },
   actions: {

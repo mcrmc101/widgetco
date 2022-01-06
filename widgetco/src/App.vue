@@ -13,7 +13,10 @@
       class="p-3"
       fluid
     >
-      <b-row align-v="center">
+      <b-row
+        align-v="center"
+        class="m-3"
+      >
         <b-col md="6">
           <b-card bg-variant="light">
             <all-widgets></all-widgets>
@@ -25,6 +28,21 @@
           </b-card>
         </b-col>
       </b-row>
+      <b-row
+        align-v="center"
+        class="m-3"
+      >
+        <b-col md="6">
+          <b-card bg-variant="light">
+            <calc-widgets></calc-widgets>
+          </b-card>
+        </b-col>
+        <b-col md="6">
+          <b-card bg-variant="light">
+            <calc-result></calc-result>
+          </b-card>
+        </b-col>
+      </b-row>
     </b-container>
   </div>
 </template>
@@ -33,11 +51,15 @@
 import axios from 'axios'
 import AddWidgets from './components/AddWidgets.vue'
 import AllWidgets from './components/AllWidgets.vue'
+import CalcWidgets from './components/CalcWidgets.vue'
+import CalcResult from './components/CalcResult.vue'
 export default {
   name: 'App',
   components: {
     AddWidgets,
-    AllWidgets
+    AllWidgets,
+    CalcWidgets,
+    CalcResult
   },
   created () {
     this.getWidgets()
