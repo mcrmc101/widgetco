@@ -41,10 +41,10 @@ export default {
       var data = {
         'num': this.num
       }
-      axios.post('http://localhost/kaweb/test/widgetapi/public/api/addWidgets', data)
+      axios.post('http://localhost/kaweb/test/widgetapi/public/api/calcWidgets', data)
         .then((res) => {
           console.log(res)
-          //this.$store.commit('calcWidgets',res.data)
+          this.$store.commit('calcWidgets', res.data)
         })
         .catch((err) => {
           console.log(err)

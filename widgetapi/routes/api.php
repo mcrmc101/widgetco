@@ -19,3 +19,4 @@ Route::get('testC', [ WidgetControl::class, 'testC' ]);
 Route::get('allWidgets', [ WidgetControl::class, 'allWidgets' ]);
 Route::post('addWidgets', [ WidgetControl::class, 'addWidgets' ]);
 Route::post('deleteWidgets', [ WidgetControl::class, 'deleteWidgets' ]);
+Route::post('calcWidgets', [ WidgetControl::class, 'calcWidgets' ]);

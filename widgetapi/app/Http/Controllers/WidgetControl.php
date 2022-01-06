@@ -30,4 +30,15 @@ class WidgetControl extends Controller
         }
         return response()->json(['Deleted'], 200);
     }
+
+    //calculate
+    public function calcWidgets(Request $req){
+        $num = e($req['num']);
+        $wid = Widget::orderBy('size','asc')->pluck('size')->get();
+        /*$widArr = array();
+        foreach($wid as $w){
+            array_push($w->size);
+        }*/
+        return $wid;
+    }
 }
