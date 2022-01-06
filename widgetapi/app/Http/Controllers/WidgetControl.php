@@ -31,7 +31,7 @@ class WidgetControl extends Controller
         return response()->json(['Deleted'], 200);
     }
     ##
-    ##First attempt at calc function adapted from https://stackoverflow.com/questions/55496089/php-packing-widgets-into-the-fewest-number-of-boxes-plus-minimum-order-quanti  Didn't quite work according to the test paramaters
+    ##First attempt at calc function adapted from https://stackoverflow.com/questions/55496089/php-packing-widgets-into-the-fewest-number-of-boxes-plus-minimum-order-quanti .Works preferring Pack Sizes over widgets, passes 251, fails others
 
     ## unused
     ##
@@ -52,7 +52,7 @@ class WidgetControl extends Controller
         return $resArr;
     }
     ##
-    ##Final Calc function. Find closest pack size to inputted number then subtract pack size from number, keeping a count along the way. 
+    ##Second Calc function. Find closest pack size to inputted number then subtract pack size from number, keeping a count along the way. Prefers widgets to pack sizes Fails 251, passes others
     ##
     public function calcWidgetsX(Request $req){
         $num = e($req['num']);
@@ -72,7 +72,37 @@ class WidgetControl extends Controller
         return array_filter($resArr);
     }
 
-    ##Merged Calc Function
+    ##Final, Merged Calc Function
+
+    public function calcWidgets(Request $req){
+        $num = e($req['num']);
+        $wid = Widget::all()->pluck('size')->toArray();
+        sort($wid);
+        $resArr = array_fill_keys($wid,0);
+        if(e($req['prefer']) === 'widgets'){
+            while($num > 0){
+                ##
+                ## find closest in array function at https://stackoverflow.com/questions/5464919/find-a-matching-or-closest-value-in-an-array
+                ##
+                $closest = array_reduce($wid, function($carry, $item) use($num) {
+                return (abs($item - $num) < abs($carry - $num) ? $item : $carry);
+                }, reset($wid));
+                $cnt = $resArr[$closest];
+                $resArr[$closest] = $cnt + 1;
+                $num = $num - $closest;
+            }
+        }
+        else{
+            while($num > 0){
+                foreach($wid as $a){
+                    if($a >= $num)break;
+                }
+                ++$resArr[$a];
+                $num -= $a;
+            }
+        }
+        return array_filter($resArr);
+    }
 
 
 }
