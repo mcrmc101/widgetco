@@ -26,6 +26,7 @@ export default {
       axios.post('http://localhost/kaweb/test/widgetapi/public/api/deleteWidgets')
         .then((res) => {
           console.log(res);
+          this.$store.commit('getWidgets')
         })
         .catch((err) => {
           console.log(err)

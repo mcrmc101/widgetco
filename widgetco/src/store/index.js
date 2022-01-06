@@ -13,7 +13,7 @@ export default new Vuex.Store({
     setWidgets (state, value) {
       state.widgets = value
     },
-    addWidgets (state) {
+    getWidgets (state) {
       axios.get('http://localhost/kaweb/test/widgetapi/public/api/allWidgets')
         .then((res) => {
           state.widgets = res.data

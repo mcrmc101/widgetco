@@ -13,36 +13,40 @@
       class="p-3"
       fluid
     >
-      <b-row
-        align-v="center"
-        class="m-3"
-      >
-        <b-col md="6">
-          <b-card bg-variant="light">
-            <all-widgets></all-widgets>
-          </b-card>
-        </b-col>
-        <b-col md="6">
-          <b-card bg-variant="light">
-            <add-widgets></add-widgets>
-          </b-card>
-        </b-col>
-      </b-row>
-      <b-row
-        align-v="center"
-        class="m-3"
-      >
-        <b-col md="6">
-          <b-card bg-variant="light">
-            <calc-widgets></calc-widgets>
-          </b-card>
-        </b-col>
-        <b-col md="6">
-          <b-card bg-variant="light">
-            <calc-result></calc-result>
-          </b-card>
-        </b-col>
-      </b-row>
+      <b-card no-body>
+        <b-row
+          align-v="center"
+          class="m-3"
+        >
+          <b-col md="6">
+            <b-card bg-variant="light">
+              <calc-widgets></calc-widgets>
+            </b-card>
+          </b-col>
+          <b-col md="6">
+            <b-card bg-variant="light">
+              <calc-result></calc-result>
+            </b-card>
+          </b-col>
+        </b-row>
+      </b-card>
+      <b-card no-body>
+        <b-row
+          align-v="center"
+          class="m-3"
+        >
+          <b-col md="6">
+            <b-card bg-variant="light">
+              <add-widgets></add-widgets>
+            </b-card>
+          </b-col>
+          <b-col md="6">
+            <b-card bg-variant="light">
+              <all-widgets></all-widgets>
+            </b-card>
+          </b-col>
+        </b-row>
+      </b-card>
     </b-container>
   </div>
 </template>

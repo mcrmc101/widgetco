@@ -30,16 +30,37 @@ class WidgetControl extends Controller
         }
         return response()->json(['Deleted'], 200);
     }
-    
-    ##Calc function. Find closest pack size to inputted number then subtract pack size from number, keeping a count along the way 
     ##
-    public function calcWidgets(Request $req){
+    ##First attempt at calc function adapted from https://stackoverflow.com/questions/55496089/php-packing-widgets-into-the-fewest-number-of-boxes-plus-minimum-order-quanti  Didn't quite work according to the test paramaters
+
+    ## unused
+    ##
+    public function calcWidgetsY(Request $req){
+        //get submitted number
+        $num = e($req['num']);
+        //get widgets 
+        $wid = Widget::all()->pluck('size')->toArray();
+        //get new array with size values as keys
+        $resArr = array_fill_keys($wid,0);
+        while($num > 0){
+            foreach($wid as $a){
+                if($a >= $num)break;
+            }
+            ++$resArr[$a];
+            $num -= $a;
+        }
+        return $resArr;
+    }
+    ##
+    ##Final Calc function. Find closest pack size to inputted number then subtract pack size from number, keeping a count along the way. 
+    ##
+    public function calcWidgetsX(Request $req){
         $num = e($req['num']);
         $wid = Widget::all()->pluck('size')->toArray();
         $resArr = array_fill_keys($wid,0);
         while($num > 0){
             ##
-            ## found closest function at https://stackoverflow.com/questions/5464919/find-a-matching-or-closest-value-in-an-array
+            ## find closest in array function at https://stackoverflow.com/questions/5464919/find-a-matching-or-closest-value-in-an-array
             ##
             $closest = array_reduce($wid, function($carry, $item) use($num) {
             return (abs($item - $num) < abs($carry - $num) ? $item : $carry);
@@ -48,7 +69,10 @@ class WidgetControl extends Controller
             $resArr[$closest] = $cnt + 1;
             $num = $num - $closest;
         }
-        return $resArr;
+        return array_filter($resArr);
     }
+
+    ##Merged Calc Function
+
 
 }

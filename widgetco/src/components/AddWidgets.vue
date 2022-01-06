@@ -48,7 +48,7 @@ export default {
       axios.post('http://localhost/kaweb/test/widgetapi/public/api/addWidgets', data)
         .then((res) => {
           console.log(res);
-          this.$store.commit('addWidgets')
+          this.$store.commit('getWidgets')
           this.$refs.addForm.reset()
         })
         .catch((err) => {
