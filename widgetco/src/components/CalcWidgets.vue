@@ -37,7 +37,7 @@ export default {
     }
   },
   methods: {
-    calcWidgets: function () {
+    calcWidgets: async function () {
       var data = {
         'num': this.num
       }

@@ -30,33 +30,25 @@ class WidgetControl extends Controller
         }
         return response()->json(['Deleted'], 200);
     }
-
-    //calculate
+    
+    ##Calc function. Find closest pack size to inputted number then subtract pack size from number, keeping a count along the way 
+    ##
     public function calcWidgets(Request $req){
-        //get submitted number
         $num = e($req['num']);
-        //get widgets ordered by size
-        $wid = Widget::orderBy('size','asc')->get();
-        //make array of size values from all widgets
-        $widArr = array();
-        foreach($wid as $w){
-            array_push($widArr,$w->size);
-        }
-        //get new array with size values as keys
-        $resArr = array_fill_keys($widArr,0);
-        //while submitted number is more than 0
+        $wid = Widget::all()->pluck('size')->toArray();
+        $resArr = array_fill_keys($wid,0);
         while($num > 0){
-            //for each widget size
-            foreach($widArr as $a){
-                // if widget size is greater or equal to submitted number end loop
-                if($a >= $num)break;
-            }
-            //add one to new size array count
-            ++$resArr[$a];
-            //subtract size value from submitted number until 0
-            $num -= $a;
+            ##
+            ## found closest function at https://stackoverflow.com/questions/5464919/find-a-matching-or-closest-value-in-an-array
+            ##
+            $closest = array_reduce($wid, function($carry, $item) use($num) {
+            return (abs($item - $num) < abs($carry - $num) ? $item : $carry);
+            }, reset($wid));
+            $cnt = $resArr[$closest];
+            $resArr[$closest] = $cnt + 1;
+            $num = $num - $closest;
         }
-        //return the new array with counts of size values
         return $resArr;
     }
+
 }
